@@ -29,6 +29,10 @@ app.post("/identify", async (c) => {
 			plant = await getPlant(results.species.commonNames[0]);
 		}
 
+    if (!plant) {
+      return c.json({ message: "No plant found" }, 404);
+    }
+
 		return c.json({ data: plant });
 	} catch (error) {
 		console.error("Error fetching data from Plantnet API:", error);
